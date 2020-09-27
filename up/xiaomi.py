@@ -4,7 +4,8 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 import time
-qianzhi = ['小米10至尊纪念版', '小米10 Pro', '小米10', '小米10 青春版 5G', '小米MIX Alpha']
+qianzhi1=['小米10至尊纪念版', '小米10 Pro', '小米10', '小米10 青春版 5G', '小米MIX Alpha']
+qianzhi = ['小米10至尊纪念版 陶瓷黑', '小米10', '小米10 青春版 5G', '小米10 Pro', '小米10/小米10 Pro 轻薄极简保护壳', '小米 10/小米10 Pro镜面视窗保护套 星空黑', '小米10 至尊纪念版 皮革保护壳 热力橙']
 def setup_module():
     #测试之前的环境准备
     global driver
@@ -26,9 +27,9 @@ def test_shouye():
         i+=1
         f=driver.find_element_by_xpath("//*[@id='J_navMenu']/div/ul/li["+str(i)+"]/a/div[2]").text
         time.sleep(0.5)
-        # j.append(f)
+        j.append(f)
     print(j)
-    if qianzhi == j:
+    if qianzhi1 == j:
         print("成功")
     else:
         print("错误")
@@ -38,25 +39,22 @@ def test_shouye():
 def test_radmi():
     global driver
     for i in qianzhi:
-        driver.find_element_by_css_selector(".search-text").send_keys(i)
+        driver.find_element_by_css_selector(".search-text").send_keys(i+'\n')
         time.sleep(0.5)
-        driver.find_element_by_css_selector("[type='submit']").click()
-        time.sleep(1)
-        t=driver.find_element_by_css_selector(" div:nth-child(1) > h2").text
-        time.sleep(0.5)
+        # driver.find_element_by_css_selector("[type='submit']").click()
+        # time.sleep(1)
+        t=driver.find_elements_by_css_selector(".goods-list .title")
+        replytext=[]
         driver.find_element_by_css_selector(".search-text").clear()
-        # print(t, i)
-        if i in t:
-            print('搜索成功')
-        else:
-            print('搜索失败')
+        for j in t:
+            replytext.append(j.text)
+        assert i in replytext
 
+
+def teardown_module():
+    #测试之后清除环境
+    global driver
     driver.quit()
-
-
-# def teardowm_module():
-#     #测试之后清除环境
-#     global driver
 
 
 if __name__ == '__main__':
