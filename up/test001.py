@@ -1,3 +1,4 @@
+import pytest as pytest
 from selenium import webdriver
 from time import sleep
 class MyTestCase(object):
@@ -17,5 +18,5 @@ class MyTestCase(object):
         driver.find_element_by_xpath("/html/body/div[1]/div[4]/div[1]/div[2]/div[2]/div/table/tbody/tr[7]/td[7]/a[1]").click()
         sleep(10)
 
-a=MyTestCase()
-a.test_002()
+if __name__ == '__main__':
+    pytest.main(['test001.py','-s'])
