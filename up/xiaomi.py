@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 qianzhi1=['小米10至尊纪念版', '小米10 Pro', '小米10', '小米10 青春版 5G', '小米MIX Alpha']
-qianzhi = ['小米10至尊纪念版 陶瓷黑', '小米10', '小米10 青春版 5G', '小米10 Pro', '小米10/小米10 Pro 轻薄极简保护壳', '小米 10/小米10 Pro镜面视窗保护套 星空黑', '小米10 至尊纪念版 皮革保护壳 热力橙']
+qianzhi = ['小米 10/小米10 Pro镜面视窗保护套 星空黑', '小米10 至尊纪念版 皮革保护壳 热力橙']
 def setup_module():
     #测试之前的环境准备
     global driver
@@ -17,7 +17,6 @@ def setup_module():
 
 def test_shouye():
     global driver
-
     mouse=driver.find_element_by_xpath("//*[@id='app']/div[1]/div/div[3]/div[1]/div[2]/ul/li[2]")
     ActionChains(driver).move_to_element(mouse).perform()
     time.sleep(2)
@@ -35,20 +34,19 @@ def test_shouye():
         print("错误")
     time.sleep(0.7)
 
-
-def test_radmi():
+@pytest.mark.parametrize('i',qianzhi) #变量，变量的列表
+def test_radmi(i):#变量需要放在这里
     global driver
-    for i in qianzhi:
-        driver.find_element_by_css_selector(".search-text").send_keys(i+'\n')
-        time.sleep(0.5)
-        # driver.find_element_by_css_selector("[type='submit']").click()
-        # time.sleep(1)
-        t=driver.find_elements_by_css_selector(".goods-list .title")
-        replytext=[]
-        driver.find_element_by_css_selector(".search-text").clear()
-        for j in t:
-            replytext.append(j.text)
-        assert i in replytext
+    driver.find_element_by_css_selector(".search-text").send_keys(i+'\n')
+    time.sleep(0.5)
+    # driver.find_element_by_css_selector("[type='submit']").click()
+    # time.sleep(1)
+    t=driver.find_elements_by_css_selector(".goods-list .title")
+    replytext=[]
+    driver.find_element_by_css_selector(".search-text").clear()
+    for j in t:
+        replytext.append(j.text)
+    assert i in replytext
 
 
 def teardown_module():
