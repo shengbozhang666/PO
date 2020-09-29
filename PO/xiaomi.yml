@@ -1,0 +1,18 @@
+IndexPage: #首页页面元素
+  denglu: ['css selector','#J_siteUserInfo>a:nth-child(1)'] #登录按钮
+  tongyi: ['css selector','.btn-primary']  #同意弹出
+  search: ['id','search']  #搜索
+
+LoginPage: #登录页面元素
+  uaer: ['id','username'] #账户
+  pawd: ['id','pwd'] #密码
+  login: ['id','login-button'] #提交按钮
+
+CommodityPage: #选择商品页
+  firtsp: ['css selector','.goods-list-box > div > div:nth-child(1) > h2'] #商品列表第一个商品
+
+ProductPage: #商品详情页面
+  add: ['css selector','.btn-box >div a'] #加入购物车元素
+
+SubmitPage:
+  su: ['css selector','.goods-info>h3'] #加入成功文案元素，断言是否成功

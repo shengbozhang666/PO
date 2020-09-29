@@ -3,16 +3,18 @@
 # 首页
 import time
 from selenium.webdriver.common import by
-
+import yaml     #解析5.1版本之后要加Loader=yaml.FullLoader
 
 class IndexPage():
     def __init__(self,driver):
         self.driver=driver
         self.driver.get("https://www.mi.com/index.html")
         #设置页面元素变量
-        self.denglu=["css selector","#J_siteUserInfo>a:nth-child(1)"] #登录按钮
-        self.tongyi=["css selector",".btn-primary"] # 同意弹出
-        self.search=["id","search"]  #搜索
+        #self.__class__.__name__ 获取当前class类名。配置文件字典名字一样
+        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+        self.denglu=eles['denglu'] #登录按钮
+        self.tongyi=eles['tongyi'] # 同意弹出
+        self.search=eles['search']  #搜索
     #进入登录页
     def To_Login(self):
             self.driver.find_element(*self.denglu).click()  # 点击登录按钮
@@ -28,9 +30,10 @@ class IndexPage():
 class LoginPage():
     def __init__(self,driver):
         self.driver=driver
-        self.uaer=['id','username']
-        self.pawd=['id','pwd']
-        self.login=['id','login-button']
+        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+        self.uaer=eles['uaer']
+        self.pawd=eles['pawd']
+        self.login=eles['login']
         #登录操作
     def Login(self):
         time.sleep(1)
@@ -45,7 +48,8 @@ class LoginPage():
 class CommodityPage():
     def __init__(self, driver):
         self.driver = driver
-        self.firtsp=['css selector','.goods-list-box > div > div:nth-child(1) > h2']
+        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+        self.firtsp=eles['firtsp']
     #选择商品
     def xze(self):
         self.driver.find_element(*self.firtsp).click()
@@ -61,7 +65,8 @@ class CommodityPage():
 class ProductPage():
     def __init__(self, driver):
         self.driver = driver
-        self.add=['css selector','.btn-box >div a']
+        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+        self.add=eles['add']
     #加入购物车
     def add_cat(self):
         time.sleep(1)
@@ -73,7 +78,8 @@ class ProductPage():
 class SubmitPage():
     def __init__(self, driver):
         self.driver = driver
-        self.su=['css selector','.goods-info>h3']
+        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+        self.su=eles['su']
     #判断提交成功
     def Submit(self):
         d = self.driver.find_element(*self.su).text
@@ -94,7 +100,4 @@ if __name__ == '__main__':
     SubmitPage=ProductPage.add_cat()
     SubmitPage.Submit()
     driver.quit()
-    import yaml
-    #解析5.1版本之后要加Loader=yaml.FullLoader
-    r=yaml.load(open('xiaomi.yml',encoding='UTF-8').read(),Loader=yaml.FullLoader)
-    print(r['IndexPage']['denglu'])
+
