@@ -94,7 +94,3 @@ if __name__ == '__main__':
     SubmitPage=ProductPage.add_cat()
     SubmitPage.Submit()
     driver.quit()
-    import yaml
-    #解析5.1版本之后要加Loader=yaml.FullLoader
-    r=yaml.load(open('xiaomi.yml',encoding='UTF-8').read(),Loader=yaml.FullLoader)
-    print(r['IndexPage']['denglu'])
