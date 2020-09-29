@@ -38,7 +38,7 @@ def test_shouye():
     time.sleep(0.7)
 
 
-@allure.feature('测试热销产品搜索') #第一级菜单
+@allure.feature('测试热销产品搜索') #报告中第一级菜单
 @allure.story('显示全部')
 @pytest.mark.parametrize('i', qianzhi)  # 变量，变量的列表
 def test_radmi(i):  # 变量需要放在这里
@@ -62,5 +62,5 @@ def teardown_module():
 
 
 if __name__ == '__main__':
-    pytest.main(['xiaomi.py', '-s', '--alluredir=tmp/my_allure_results'])
+    pytest.main(['xiaomi_allure.py', '-s', '--alluredir=tmp/my_allure_results'])
     os.system("allure serve C:\\Users\\ASUS\\PycharmProjects\\TEST_0\\up\\tmp\\my_allure_results")

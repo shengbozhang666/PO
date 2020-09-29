@@ -15,7 +15,7 @@ def before_wentest():
     yield
     print("执行清除")
     after_wentest()
-
+#allure报告中定义执行是单个用例还是模组
 @pytest.fixture(scope='module',autouse=True)
 def test_shouye():
     global driver
@@ -57,6 +57,6 @@ def after_wentest():
 
 
 if __name__ == '__main__':
-    pytest.main(['xiaomi.py','-s',])
+    pytest.main(['xiaomi_allure.py','-s',])
 
 
