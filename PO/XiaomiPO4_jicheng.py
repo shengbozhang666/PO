@@ -34,7 +34,7 @@ class IndexPage(BasePage):
         self.driver.get("https://www.mi.com/index.html")
         #设置页面元素变量
         #self.__class__.__name__ 获取当前class类名。配置文件字典名字一样
-        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+        eles = yaml.load(open('../element/xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
         self.denglu=eles['denglu'] #登录按钮
         self.tongyi=eles['tongyi'] # 同意弹出
         self.search=eles['search']  #搜索
@@ -53,7 +53,7 @@ class IndexPage(BasePage):
 class LoginPage(BasePage):
     def __init__(self,driver):
         super().__init__(driver)
-        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+        eles = yaml.load(open('../element/xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
         self.uaer=eles['uaer']
         self.pawd=eles['pawd']
         self.login=eles['login']
@@ -71,7 +71,7 @@ class LoginPage(BasePage):
 class CommodityPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
-        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+        eles = yaml.load(open('../element/xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
         self.firtsp=eles['firtsp']
     #选择商品
     def xze(self):
@@ -84,7 +84,7 @@ class CommodityPage(BasePage):
 class ProductPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
-        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+        eles = yaml.load(open('../element/xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
         self.add=eles['add']
     #加入购物车
     def add_cat(self):
@@ -97,7 +97,7 @@ class ProductPage(BasePage):
 class SubmitPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
-        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+        eles = yaml.load(open('../element/xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
         self.su=eles['su']
     #判断提交成功
     def Submit(self):

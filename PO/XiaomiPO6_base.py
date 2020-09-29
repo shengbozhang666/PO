@@ -1,13 +1,12 @@
 # 首页
 import time
-import yaml     #解析5.1版本之后要加Loader=yaml.FullLoader
-from PO import BasePage
+from Base import BasePage
+
 
 class IndexPage(BasePage.BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver.get("https://www.mi.com/index.html")
-
     def To_Login(self):
         self.click(*self.denglu) # 点击登录按钮
         time.sleep(0.5)

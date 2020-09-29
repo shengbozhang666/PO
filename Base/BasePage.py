@@ -3,7 +3,8 @@ class BasePage():
     # 将公共方法进行封装继承,保存页面操作的公共方法
     def __init__(self,driver):
         self.driver=driver
-        eles = yaml.load(open('xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
+
+        eles = yaml.load(open('../element/xiaomi.yml', encoding='UTF-8').read(), Loader=yaml.FullLoader)[self.__class__.__name__]
         for ele in  eles:
             self.__setattr__(ele,eles[ele])
         #点击元素
